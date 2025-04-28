@@ -1,0 +1,18 @@
+{
+    "name": "AI TTS Extension",
+    "author_name": "YourNameHere",
+    "version": "0.0.1",
+    "description": "An AI-powered text-to-speech Twitch Extension with OpenAI and ElevenLabs support.",
+    "state": "testing",
+    "type": "overlay",
+    "views": {
+      "video_overlay": {
+        "viewer_url": "https://your-https-tunnel.io/twitch"
+      }
+    },
+    "permissions": {
+      "chat": [],
+      "whitelisted_panel_urls": []
+    }
+  }
+  

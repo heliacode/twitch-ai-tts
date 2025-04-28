@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple AI TTS</title>
+</head>
+<body>
+  <h1>AI TTS Test</h1>
+
+  <input type="text" id="textInput" placeholder="Type something..." size="50">
+
+  <select id="voiceSelect">
+    <optgroup label="OpenAI Voices">
+        <option value="nova">Nova (neutral female)</option>
+        <option value="echo">Echo (deep male)</option>
+        <option value="onyx">Onyx (calm male)</option>
+        <option value="fable">Fable (storyteller)</option>    
+    </optgroup>
+    <optgroup label="ElevenLabs Voices">
+        <option value="elevenlabs-default">Premium Emotional Voice</option>
+    </optgroup>    
+  </select>
+
+  <button onclick="sendText()">Speak</button>
+
+  <audio id="audioPlayer" controls style="margin-top:20px;"></audio>
+
+  <script>
+    async function sendText() {
+      const text = document.getElementById('textInput').value;
+      const voice = document.getElementById('voiceSelect').value;
+
+      const response = await fetch('http://localhost:3000/speak', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ text, voice })
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const audioUrl = URL.createObjectURL(blob);
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.src = audioUrl;
+        audioPlayer.play();
+      } else {
+        alert('Failed to speak.');
+      }
+    }
+  </script>
+</body>
+</html>
